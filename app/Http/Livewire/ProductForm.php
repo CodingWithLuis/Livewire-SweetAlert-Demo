@@ -4,10 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use Illuminate\View\View;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class ProductForm extends Component
 {
+    use LivewireAlert;
+
+    protected $listeners = [
+        'confirmed'
+    ];
+
     public $name;
     public $price;
 
@@ -27,7 +34,22 @@ class ProductForm extends Component
             'price' => $this->price,
         ]);
 
+        $this->flash('success', 'Basic Alert');
+
+        // // $this->alert('info', 'This is not as toast alert', [
+        // //     'toast' => false
+        // // ]);
+        //
+        // $this->alert('question', 'How are you today?', [
+        //     'showConfirmButton' => true
+        // ]);
+
         return redirect()->route('products.index');
+    }
+
+    public function confirmed()
+    {
+        // Do something
     }
 
     /**
